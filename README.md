@@ -65,15 +65,4 @@ Android drive google API 34
 => Profile (added)
 => Bottom Navigation Bar (added)
 
-Now it contains all the screen, thanks for your love and support 🙏 
-
-## Photos
-![Preview](/1.png)
-![Preview](2.png)
-![Preview](3.png)
-![Preview](4.png)
-![Preview](5.png)
-![Preview](6.png)
-![Preview](7.png)
-
 ## Preview
