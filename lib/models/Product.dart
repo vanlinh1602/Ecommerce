@@ -27,10 +27,10 @@ List<Product> demoProducts = [
   Product(
     id: 1,
     images: [
-      "assets/images/ps4_console_white_1.png",
-      "assets/images/ps4_console_white_2.png",
-      "assets/images/ps4_console_white_3.png",
-      "assets/images/ps4_console_white_4.png",
+      "assets/images/shoes/Pro_A6T015_1.jpeg",
+      "assets/images/shoes/Pro_A6T015_2.jpeg",
+      "assets/images/shoes/Pro_A6T015_3.jpeg",
+      "assets/images/shoes/Pro_A6T015_5.jpeg",
     ],
     colors: [
       const Color(0xFFF6625E),
@@ -38,8 +38,8 @@ List<Product> demoProducts = [
       const Color(0xFFDECB9C),
       Colors.white,
     ],
-    title: "Wireless Controller for PS4™",
-    price: 64.99,
+    title: "Pro A6T015™",
+    price: 25.99,
     description: description,
     rating: 4.8,
     isFavourite: true,
@@ -48,7 +48,10 @@ List<Product> demoProducts = [
   Product(
     id: 2,
     images: [
-      "assets/images/Image Popular Product 2.png",
+      "assets/images/shoes/Pro_AV00174_1.jpeg",
+      "assets/images/shoes/Pro_AV00174_2.jpeg",
+      "assets/images/shoes/Pro_AV00174_3.jpeg",
+      "assets/images/shoes/Pro_AV00174_4.jpeg",
     ],
     colors: [
       const Color(0xFFF6625E),
@@ -56,8 +59,8 @@ List<Product> demoProducts = [
       const Color(0xFFDECB9C),
       Colors.white,
     ],
-    title: "Nike Sport White - Man Pant",
-    price: 50.5,
+    title: "Pro AV00174",
+    price: 20.5,
     description: description,
     rating: 4.1,
     isPopular: true,
@@ -65,7 +68,10 @@ List<Product> demoProducts = [
   Product(
     id: 3,
     images: [
-      "assets/images/glap.png",
+      "assets/images/shoes/Pro_AV00180_1.jpeg",
+      "assets/images/shoes/Pro_AV00180_2.jpeg",
+      "assets/images/shoes/Pro_AV00180_3.jpeg",
+      "assets/images/shoes/Pro_AV00180_4.jpeg",
     ],
     colors: [
       const Color(0xFFF6625E),
@@ -73,7 +79,7 @@ List<Product> demoProducts = [
       const Color(0xFFDECB9C),
       Colors.white,
     ],
-    title: "Gloves XC Omega - Polygon",
+    title: "Pro AV00180",
     price: 36.55,
     description: description,
     rating: 4.1,
@@ -83,7 +89,10 @@ List<Product> demoProducts = [
   Product(
     id: 4,
     images: [
-      "assets/images/wireless headset.png",
+      "assets/images/shoes/Pro_AV00204_1.jpeg",
+      "assets/images/shoes/Pro_AV00204_2.jpeg",
+      "assets/images/shoes/Pro_AV00204_3.jpeg",
+      "assets/images/shoes/Pro_AV00204_4.jpeg",
     ],
     colors: [
       const Color(0xFFF6625E),
@@ -91,19 +100,19 @@ List<Product> demoProducts = [
       const Color(0xFFDECB9C),
       Colors.white,
     ],
-    title: "Logitech Head",
+    title: "Pro AV00204",
     price: 20.20,
     description: description,
     rating: 4.1,
     isFavourite: true,
   ),
   Product(
-    id: 1,
+    id: 5,
     images: [
-      "assets/images/ps4_console_white_1.png",
-      "assets/images/ps4_console_white_2.png",
-      "assets/images/ps4_console_white_3.png",
-      "assets/images/ps4_console_white_4.png",
+      "assets/images/shoes/Pro_AV00205_1.jpeg",
+      "assets/images/shoes/Pro_AV00205_2.jpeg",
+      "assets/images/shoes/Pro_AV00205_3.jpeg",
+      "assets/images/shoes/Pro_AV00205_4.jpeg",
     ],
     colors: [
       const Color(0xFFF6625E),
@@ -111,17 +120,20 @@ List<Product> demoProducts = [
       const Color(0xFFDECB9C),
       Colors.white,
     ],
-    title: "Wireless Controller for PS4™",
-    price: 64.99,
+    title: "Pro AV00205",
+    price: 24.99,
     description: description,
     rating: 4.8,
     isFavourite: true,
     isPopular: true,
   ),
   Product(
-    id: 2,
+    id: 6,
     images: [
-      "assets/images/Image Popular Product 2.png",
+      "assets/images/shoes/Pro_AV00207_1.jpg",
+      "assets/images/shoes/Pro_AV00207_2.jpg",
+      "assets/images/shoes/Pro_AV00207_3.jpg",
+      "assets/images/shoes/Pro_AV00207_4.jpg",
     ],
     colors: [
       const Color(0xFFF6625E),
@@ -129,48 +141,13 @@ List<Product> demoProducts = [
       const Color(0xFFDECB9C),
       Colors.white,
     ],
-    title: "Nike Sport White - Man Pant",
+    title: "Pro AV00207",
     price: 50.5,
     description: description,
     rating: 4.1,
     isPopular: true,
-  ),
-  Product(
-    id: 3,
-    images: [
-      "assets/images/glap.png",
-    ],
-    colors: [
-      const Color(0xFFF6625E),
-      const Color(0xFF836DB8),
-      const Color(0xFFDECB9C),
-      Colors.white,
-    ],
-    title: "Gloves XC Omega - Polygon",
-    price: 36.55,
-    description: description,
-    rating: 4.1,
-    isFavourite: true,
-    isPopular: true,
-  ),
-  Product(
-    id: 4,
-    images: [
-      "assets/images/wireless headset.png",
-    ],
-    colors: [
-      const Color(0xFFF6625E),
-      const Color(0xFF836DB8),
-      const Color(0xFFDECB9C),
-      Colors.white,
-    ],
-    title: "Logitech Head",
-    price: 20.20,
-    description: description,
-    rating: 4.1,
-    isFavourite: true,
   ),
 ];
 
 const String description =
-    "Wireless Controller for PS4™ gives you what you want in your gaming from over precision control your games to sharing …";
+    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English";
