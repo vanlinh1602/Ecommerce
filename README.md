@@ -51,11 +51,6 @@ Android drive google API 34
 
 - **Third-Party Plugins:**
 
-
-### Video Preview of the Shop template
-
-![Preview](/intro.gif)
-
 ## Screens it contains:
 
 => Onboarding
