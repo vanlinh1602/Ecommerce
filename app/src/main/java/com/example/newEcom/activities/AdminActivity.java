@@ -69,8 +69,17 @@ public class AdminActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()){
-                            countOrders.setText(task.getResult().get("countOfOrderedItems").toString());
-                            priceOrders.setText(task.getResult().get("priceOfOrders").toString());
+                            if (task.getResult().get("countOfOrderedItems") == null){
+                                countOrders.setText("0");
+                            } else {
+                                countOrders.setText(task.getResult().get("countOfOrderedItems").toString());
+                            }
+
+                            if (task.getResult().get("priceOfOrders") == null){
+                                priceOrders.setText("0");
+                            } else {
+                                priceOrders.setText(task.getResult().get("priceOfOrders").toString());
+                            }
                         }
                     }
                 });

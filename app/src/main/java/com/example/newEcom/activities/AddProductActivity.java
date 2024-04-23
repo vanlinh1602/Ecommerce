@@ -55,7 +55,8 @@ import java.util.List;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class AddProductActivity extends AppCompatActivity {
-    TextInputEditText idEditText, nameEditText, descEditText, specEditText, stockEditText, priceEditText, discountEditText;
+    TextInputEditText idEditText, nameEditText, descEditText, specEditText, stockEditText, priceEditText,
+            discountEditText;
     Button imageBtn, addProductBtn;
     ImageView backBtn, productImageView;
     TextView removeImageBtn;
@@ -69,7 +70,7 @@ public class AddProductActivity extends AppCompatActivity {
     Context context = this;
     boolean imageUploaded = false;
 
-    //    ProgressDialog dialog;
+    // ProgressDialog dialog;
     SweetAlertDialog dialog;
 
     @Override
@@ -97,29 +98,33 @@ public class AddProductActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            productId = Integer.parseInt(task.getResult().get("lastProductId").toString()) + 1;
+                            if (task.getResult().get("lastProductId") == null) {
+                                productId = 1;
+                            } else {
+                                productId = Integer.parseInt(task.getResult().get("lastProductId").toString()) + 1;
+                            }
                             idEditText.setText(productId + "");
                         }
                     }
                 });
 
-//        FirebaseUtil.getCategories().orderBy("name")
-//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            int i = 0;
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                categories[i] = ((String) document.getData().get("name"));
-//                                Log.i("Category", categories[i]);
-//                                i++;
-//                            }
-//                        }
-//                    }
-//                });
+        // FirebaseUtil.getCategories().orderBy("name")
+        // .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        // @Override
+        // public void onComplete(@NonNull Task<QuerySnapshot> task) {
+        // if (task.isSuccessful()) {
+        // int i = 0;
+        // for (QueryDocumentSnapshot document : task.getResult()) {
+        // categories[i] = ((String) document.getData().get("name"));
+        // Log.i("Category", categories[i]);
+        // i++;
+        // }
+        // }
+        // }
+        // });
 
-//        Toast.makeText(this, Arrays.toString(categories), Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this, categories.length+"", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, Arrays.toString(categories), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, categories.length+"", Toast.LENGTH_SHORT).show();
 
         imageBtn.setOnClickListener(v -> {
             Intent intent = new Intent();
@@ -129,7 +134,8 @@ public class AddProductActivity extends AppCompatActivity {
         });
 
         addProductBtn.setOnClickListener(v -> {
-            generateDynamicLink();
+            addToFirebase();
+            // generateDynamicLink();
         });
 
         backBtn.setOnClickListener(v -> {
@@ -140,9 +146,9 @@ public class AddProductActivity extends AppCompatActivity {
             removeImage();
         });
 
-//        dialog = new ProgressDialog(this);
-//        dialog.setMessage("Uploading image...");
-//        dialog.setCancelable(false);
+        // dialog = new ProgressDialog(this);
+        // dialog.setMessage("Uploading image...");
+        // dialog.setCancelable(false);
         dialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         dialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         dialog.setTitleText("Uploading image...");
@@ -189,10 +195,11 @@ public class AddProductActivity extends AppCompatActivity {
         int price = Integer.parseInt(priceEditText.getText().toString());
         int discount = Integer.parseInt(discountEditText.getText().toString());
         int stock = Integer.parseInt(stockEditText.getText().toString());
-//        productId = Integer.parseInt(idEditText.getText().toString());
+        // productId = Integer.parseInt(idEditText.getText().toString());
 
-        ProductModel model = new ProductModel(productName, sk, productImage, category, desc, spec, price, discount, price - discount, productId, stock, shareLink, 0f, 0);
-//        Log.i("Link2", shareLink);
+        ProductModel model = new ProductModel(productName, sk, productImage, category, desc, spec, price, discount,
+                price - discount, productId, stock, shareLink, 0f, 0);
+        // Log.i("Link2", shareLink);
         FirebaseUtil.getProducts().add(model)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -202,7 +209,8 @@ public class AddProductActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-                                            Toast.makeText(AddProductActivity.this, "Product has been added successfully!", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(AddProductActivity.this,
+                                                    "Product has been added successfully!", Toast.LENGTH_SHORT).show();
                                             finish();
                                         }
                                     }
@@ -212,7 +220,7 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     private void generateDynamicLink() {
-//        Log.i("Function", "Function called");
+        // Log.i("Function", "Function called");
         if (!validate())
             return;
 
@@ -231,7 +239,7 @@ public class AddProductActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Uri shortLink = task.getResult().getShortLink();
                             shareLink = shortLink.toString();
-//                            Log.i("Link True", shareLink);
+                            // Log.i("Link True", shareLink);
 
                             addToFirebase();
                         } else {
@@ -317,25 +325,26 @@ public class AddProductActivity extends AppCompatActivity {
                         .addOnCompleteListener(t -> {
                             imageUploaded = true;
 
-                            FirebaseUtil.getProductImageReference(productId + "").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    productImage = uri.toString();
-
-                                    Picasso.get().load(uri).into(productImageView, new Callback() {
+                            FirebaseUtil.getProductImageReference(productId + "").getDownloadUrl()
+                                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
                                         @Override
-                                        public void onSuccess() {
-                                            dialog.dismiss();
-                                        }
+                                        public void onSuccess(Uri uri) {
+                                            productImage = uri.toString();
 
-                                        @Override
-                                        public void onError(Exception e) {
+                                            Picasso.get().load(uri).into(productImageView, new Callback() {
+                                                @Override
+                                                public void onSuccess() {
+                                                    dialog.dismiss();
+                                                }
+
+                                                @Override
+                                                public void onError(Exception e) {
+                                                }
+                                            });
+                                            productImageView.setVisibility(View.VISIBLE);
+                                            removeImageBtn.setVisibility(View.VISIBLE);
                                         }
                                     });
-                                    productImageView.setVisibility(View.VISIBLE);
-                                    removeImageBtn.setVisibility(View.VISIBLE);
-                                }
-                            });
                         });
             }
         }

@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment {
     CategoryAdapter categoryAdapter;
     ProductAdapter productAdapter;
 
-//    TextView textView;
+    // TextView textView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -52,11 +52,11 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         searchBar = getActivity().findViewById(R.id.searchBar);
-//        textView = view.findViewById(R.id.textView);
+        // textView = view.findViewById(R.id.textView);
         categoryRecyclerView = view.findViewById(R.id.categoryRecyclerView);
         productRecyclerView = view.findViewById(R.id.productRecyclerView);
         carousel = view.findViewById(R.id.carousel);
@@ -67,9 +67,9 @@ public class HomeFragment extends Fragment {
         activity.showSearchBar();
         shimmerFrameLayout.startShimmer();
 
-//        textView.setOnClickListener(v -> {
-//            startActivity(new Intent(getActivity(), AdminActivity.class));
-//        });
+        // textView.setOnClickListener(v -> {
+        // startActivity(new Intent(getActivity(), AdminActivity.class));
+        // });
 
         initCarousel();
         initCategories();
@@ -79,16 +79,17 @@ public class HomeFragment extends Fragment {
     }
 
     private void initCarousel() {
-        FirebaseUtil.getBanner().orderBy("bannerId").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        carousel.addData(new CarouselItem(document.get("bannerImage").toString()));
+        FirebaseUtil.getBanner().orderBy("bannerId").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                carousel.addData(new CarouselItem(document.get("bannerImage").toString()));
+                            }
+                        }
                     }
-                }
-            }
-        });
+                });
     }
 
     private void initCategories() {
@@ -105,6 +106,8 @@ public class HomeFragment extends Fragment {
 
     private void initProducts() {
         Query query = FirebaseUtil.getProducts();
+        // print query
+        System.out.println(query);
         FirestoreRecyclerOptions<ProductModel> options = new FirestoreRecyclerOptions.Builder<ProductModel>()
                 .setQuery(query, ProductModel.class)
                 .build();

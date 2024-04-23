@@ -67,7 +67,12 @@ public class AddCategoryActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            categoryId = Integer.parseInt(task.getResult().get("lastCategoryId").toString()) + 1;
+                            if (task.getResult().get("lastCategoryId") == null) {
+                                FirebaseUtil.getDetails().update("lastCategoryId", 0);
+                                categoryId = 0;
+                            } else {
+                                categoryId = Integer.parseInt(task.getResult().get("lastCategoryId").toString()) + 1;
+                            }
                             idEditText.setText(categoryId+ "");
                         }
                     }

@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                         changeInProgress(false);
                         if (task.isSuccessful()) {
                             if (firebaseAuth.getCurrentUser().isEmailVerified()) {
-                                if (firebaseAuth.getCurrentUser().getEmail().equals("linhnguyen92542@gmail.com"))
+                                if (firebaseAuth.getCurrentUser().getEmail().equals("linhnv1622@gmail.com"))
                                     startActivity(new Intent(LoginActivity.this, AdminActivity.class),
                                             ActivityOptions.makeSceneTransitionAnimation(activity).toBundle());
                                 else
@@ -177,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
                             // }
                             // }
                             // });
-                            if (email.equals("linhnguyen92542@gmail.com")) // Admin
+                            if (email.equals("linhnv1622@gmail.com")) // Admin
                                 startActivity(new Intent(LoginActivity.this, AdminActivity.class));
                             else
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));

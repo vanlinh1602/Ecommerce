@@ -29,7 +29,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (currUser == null) {
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 } else {
-                    if (FirebaseAuth.getInstance().getCurrentUser().getEmail().equals("linhnguyen92542@gmail.com"))
+                    if (FirebaseAuth.getInstance().getCurrentUser().getEmail().equals("linhnv1622@gmail.com"))
                         startActivity(new Intent(SplashActivity.this, AdminActivity.class));
                     else
                         startActivity(new Intent(SplashActivity.this, MainActivity.class));

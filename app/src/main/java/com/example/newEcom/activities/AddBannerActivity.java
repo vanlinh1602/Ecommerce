@@ -68,6 +68,11 @@ public class AddBannerActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
+                            if (task.getResult().get("lastBannerId") == null) {
+                                bannerId = 1;
+                                idEditText.setText(bannerId + "");
+                                return;
+                            }
                             bannerId = Integer.parseInt(task.getResult().get("lastBannerId").toString()) + 1;
                             idEditText.setText(bannerId + "");
                         }
