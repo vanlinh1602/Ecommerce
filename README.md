@@ -1,68 +1,60 @@
-# Flutter E-Commerce App 🛍️📱
+# Shoe E-Commerce Android App
 
-Welcome to the Flutter E-Commerce App project! This app is designed to provide a seamless shopping experience for users to browse, search, and purchase products directly from their mobile devices.
+<img src="https://github.com/rahultripathi17/Shoe_Ecommerce_Android_App/assets/165544212/996a825e-8a40-4622-8625-ceb2ae802dcd" align="left" width="150" hspace="10" vspace="10">
 
-## Requirement
+This Shoe E-Commerce Android App is a demonstration of basic functionality implemented using Android Studio. It showcases a simple yet functional interface for browsing shoe brands, managing a shopping cart, wish list, and user profile. Please note that this app is for demonstration purposes only and is not intended for real-world use.
 
-**Flutter version**
-
-![image](https://github.com/vanlinh1602/Ecommerce/assets/81768181/a1e19160-f846-430e-a17f-90b142e3f4aa)
-
-**Android API**
-Android drive google API 34
-
-![image](https://github.com/vanlinh1602/Ecommerce/assets/81768181/4e1e4b58-8c07-4977-993d-d68a3db0de1d)
-
-## How to run
-- Install flutter with version requirement.
-- Install package
-  ```
-  flutter pub get
-  ```
-- Run project
-  ```
-  flutter run
-  ```
+<p align="left">
+<a href="https://drive.google.com/file/d/1jRR6ZE6aVhxAqMWE9D153fUA0LFN8h8d/view?usp=sharing">
+    <img alt="Download Our App"
+        height="60"
+        src="https://github.com/rahultripathi17/Shoe_Ecommerce_Android_App/assets/165544212/43c13033-9dc8-4285-b46c-49c1873bae1a" /></a> 
+        </p>
+<br>
 
 ## Features
 
-- **Product Catalog:**
-  - Browse through a wide range of products with detailed descriptions and images.
+- **Login Screen**: Users can log in to access their accounts and personalized features.
+- **Home Screen**: Featuring a bottom navigation bar for easy access to different sections:
+  - **Home**: Displays categories of different shoe brands.
+  - **Search**: Allows users to search for specific shoe products.
+  - **Cart**: Displays items added to the shopping cart.
+  - **Wish List**: Allows users to save items they wish to purchase later.
+  - **Profile**: Provides access to user account information and settings.
+  
+## Demo Video
 
-- **Search Functionality:**
-  - Easily search for specific products by name, category, or keyword.
+For a visual demonstration of the app's functionality, watch
 
-- **Shopping Cart:**
-  - Add products to the cart, update quantities, and proceed to checkout.
+<p align="center">
+  <strong>App Demo Video</strong>
+</p>
 
-- **Secure Checkout:**
-  - Integrated payment options for a secure and hassle-free checkout process.
+<p align="center">
+  <a href="https://drive.google.com/file/d/1ubCtlsfgMRLsH22R2HK0kbZB3ZoA4HcP/view?usp=sharing">
+    <img src="https://github.com/rahultripathi17/Shoe_Ecommerce_Android_App/assets/165544212/51b41ad8-b837-4c58-a1f7-5e2609ebeee2" alt="Ecommerce App Demo video" width="200px" />
+  </a>
+</p>
 
-- **User Authentication:**
-  - Allow users to create accounts, log in, and manage their profiles.
+
+## Installation
+
+To install App on your Android device, follow these steps:
+
+1. Download the APK file from [here](https://drive.google.com/file/d/1jRR6ZE6aVhxAqMWE9D153fUA0LFN8h8d/view?usp=sharing)
+2. Enable installation from unknown sources in your device settings.
+3. Install the APK file on your device.
+
+## Customization
+
+The app's structure is designed to be easily adaptable to showcase different types of products, such as clothing, accessories, or any other items you wish to feature. Simply modify the codebase to replace shoe-related content with your desired content.
 
 ## Technologies Used
 
-- **Flutter:**
-  - UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.
+- **Android Studio**: Integrated Development Environment (IDE) for Android app development.
+- **Java**: Programming language used for Android app development.
+- **XML**: Markup language for designing user interfaces in Android apps.
 
-- **Firebase:**
-  - Backend services for authentication, database, and hosting.
+## Contributions
 
-- **Third-Party Plugins:**
-
-## Screens it contains:
-
-=> Onboarding
-=> Login
-=> Forgot Password
-=> Sign Up
-=> Complete Profile
-=> OTP Verification
-=> Home Page
-=> Product Details
-=> Order
-=> Profile (added)
-=> Bottom Navigation Bar (added)
-
-## Preview
+Contributions to this project are welcome. If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
