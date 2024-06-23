@@ -1,5 +1,7 @@
 package com.project.stacklab.Fragments;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.project.stacklab.Activities.ProductDetail;
 import com.project.stacklab.Adapters.BannerPagerAdapter;
 import com.project.stacklab.Adapters.CategoriesAdapter;
 import com.project.stacklab.Adapters.ItemAdapter;
@@ -45,9 +48,9 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
         // Inflate the layout for this fragment
+
         return binding.getRoot();
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -58,7 +61,7 @@ public class HomeFragment extends Fragment {
             cartItems = (ObservableArrayList<CartModel>)
                     getArguments().getSerializable("cartItems");
         }
-
+        setCatLog();
 
     }
 
@@ -86,10 +89,19 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemSelected(ItemModel Item) {
                 if (cartItems != null) {
-                    Item.setPrice(10);
                     cartItems.add(new CartModel(Item, 1));
                     Toast.makeText(getContext(), "Added to cart", Toast.LENGTH_SHORT).show();
                 }
+            }
+
+            @Override
+            public void onImageSelected(ItemModel item) {
+                //Toast.makeText(getContext(), "Image clicked", Toast.LENGTH_SHORT).show();
+                // change to product detail
+                Intent intent = new Intent(getContext(), ProductDetail.class);
+                intent.putExtra("item", item.getFindId());
+//                intent.putExtra("cartItems", cartItems);
+                startActivity(intent);
             }
         });
 
@@ -139,19 +151,4 @@ public class HomeFragment extends Fragment {
         handler.postDelayed(runnable, 5000);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        new bgThread().start();
-    }
-
-    class bgThread extends Thread {
-        @Override
-        public void run() {
-            super.run();
-
-
-            setCatLog();
-        }
-    }
 }

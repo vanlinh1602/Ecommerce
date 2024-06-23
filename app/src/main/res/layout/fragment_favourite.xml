@@ -76,56 +76,65 @@
         android:clipToPadding="false"
         android:orientation="vertical">
 
-        <GridLayout
+<!--        <GridLayout-->
+<!--            android:id="@+id/rv_items"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:clipToPadding="false"-->
+<!--            android:columnCount="2"-->
+<!--            android:orientation="vertical"-->
+<!--            android:paddingHorizontal="14dp"-->
+<!--            android:paddingBottom="150dp"-->
+<!--            tools:listitem="@layout/card_item">-->
+
+<!--            <include-->
+<!--                layout="@layout/card_item"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp" />-->
+
+<!--            <include-->
+<!--                layout="@layout/card_item"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp" />-->
+
+<!--            <include-->
+<!--                layout="@layout/card_item"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp" />-->
+
+<!--            <include-->
+<!--                layout="@layout/card_item"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp" />-->
+
+<!--            <include-->
+<!--                layout="@layout/card_item"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp" />-->
+
+<!--            <include-->
+<!--                layout="@layout/card_item"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp" />-->
+
+
+<!--        </GridLayout>-->
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_items"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:clipToPadding="false"
-            android:columnCount="2"
-            android:orientation="vertical"
-            android:paddingHorizontal="14dp"
             android:paddingBottom="150dp"
-            tools:listitem="@layout/card_item">
-
-            <include
-                layout="@layout/card_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
-
-            <include
-                layout="@layout/card_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
-
-            <include
-                layout="@layout/card_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
-
-            <include
-                layout="@layout/card_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
-
-            <include
-                layout="@layout/card_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
-
-            <include
-                layout="@layout/card_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
-
-
-        </GridLayout>
+            android:paddingHorizontal="14dp" />
     </ScrollView>
 
 

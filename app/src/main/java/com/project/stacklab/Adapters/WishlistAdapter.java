@@ -15,8 +15,8 @@ import com.project.stacklab.databinding.CardItemBinding;
 
 import java.util.List;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
-    
+public class WishlistAdapter extends RecyclerView.Adapter<WishlistAdapter.MyViewHolder> {
+
     Context context;
     List<ItemModel> itemList;
 
@@ -24,7 +24,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     int selectedPosition;
 
 
-    public ItemAdapter(Context context, List<ItemModel> itemList, ItemSelectListener itemSelectListener) {
+    public WishlistAdapter(Context context, List<ItemModel> itemList, ItemSelectListener itemSelectListener) {
         this.context = context;
         this.itemList = itemList;
         this.itemSelectListener = itemSelectListener;
@@ -34,7 +34,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ItemAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.card_item,parent,false));
+        return new WishlistAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.card_item,parent,false));
 
     }
 

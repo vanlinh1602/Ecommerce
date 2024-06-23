@@ -9,6 +9,9 @@ public class ItemModel {
     @PrimaryKey(autoGenerate = true)
     public long id;
 
+    @ColumnInfo(name = "findId")
+    public String findId;
+
     @ColumnInfo(name = "name")
     public String name;
 
@@ -23,6 +26,9 @@ public class ItemModel {
 
     @ColumnInfo(name = "category")
     public String category;
+
+    @ColumnInfo(name = "description")
+    public String description;
 
     public long getId() {
         return id;
@@ -71,4 +77,17 @@ public class ItemModel {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getFindId() {
+        return this.name + this.price + this.type + this.category;
+    }
+
 }

@@ -73,9 +73,11 @@ public class MainActivity extends AppCompatActivity {
         Fragment f1 = new HomeFragment();
         f1.setArguments(bundle);
         Fragment f2 = new SearchFragment();
+        f2.setArguments(bundle);
         Fragment f3 = new CartFragment();
         f3.setArguments(bundle);
         Fragment f4 = new FavouriteFragment();
+        f4.setArguments(bundle);
         Fragment f5 = new ProfileFragment();
 
 
@@ -115,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClickItem(MeowBottomNavigation.Model item) {
                 //Toast.makeText(MainActivity.this, String.valueOf(item.getId()), Toast.LENGTH_SHORT).show();
-
 
 
             }

@@ -8,12 +8,13 @@ import androidx.room.RoomDatabase;
 
 import com.project.stacklab.Models.CategoryModel;
 import com.project.stacklab.Models.ItemModel;
+import com.project.stacklab.Models.WishlistModel;
 
-@Database(entities = {CategoryModel.class, ItemModel.class}, version = 1)
+@Database(entities = {CategoryModel.class, ItemModel.class, WishlistModel.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract CategoryDao categoryDao();
     public abstract ItemDao itemDao();
-
+    public  abstract WishlistDao wishlistDao();
     private static AppDatabase instance;
     public static AppDatabase getInstance(Context context) {
         if (instance == null) {

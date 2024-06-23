@@ -16,4 +16,12 @@ public interface ItemDao {
     @Query("SELECT * FROM items WHERE category = :categoryName")
     List<ItemModel> getItemsForCategory(String categoryName);
 
+    @Query("SELECT * FROM items WHERE findId = :itemId")
+    ItemModel getItemById(String itemId);
+
+    @Query("SELECT * FROM items WHERE findId in (:itemIds)")
+    List<ItemModel> getItemsByFindIds(List<String> itemIds);
+
+    @Query("SELECT * FROM items")
+    List<ItemModel> getAllItems();
 }

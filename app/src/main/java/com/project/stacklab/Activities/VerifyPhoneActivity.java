@@ -115,6 +115,8 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 "https://ananas.vn/wp-content/uploads/Pro_AV00206_2.jpeg"};
 
 
+
+
         for (String s : categories) {
             db.categoryDao().insertCategory(new CategoryModel(s));
             for (int i = 0; i < 10; i++) {
@@ -124,6 +126,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 randomShoe.image = links[random.nextInt(links.length)];
                 randomShoe.type = types[random.nextInt(types.length)];
                 randomShoe.category = categories[random.nextInt(categories.length)];
+                randomShoe.findId = randomShoe.name + randomShoe.price + randomShoe.type + randomShoe.category;
                 db.itemDao().insertItem(randomShoe);
             }
         }

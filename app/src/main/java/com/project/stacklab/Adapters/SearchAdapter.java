@@ -12,29 +12,33 @@ import com.bumptech.glide.Glide;
 import com.project.stacklab.Models.ItemModel;
 import com.project.stacklab.R;
 import com.project.stacklab.databinding.CardItemBinding;
+import com.project.stacklab.databinding.CardSearchItemBinding;
 
 import java.util.List;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
-    
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHolder> {
+
     Context context;
     List<ItemModel> itemList;
+
+    List<String> wishlists;
 
     ItemSelectListener itemSelectListener;
     int selectedPosition;
 
 
-    public ItemAdapter(Context context, List<ItemModel> itemList, ItemSelectListener itemSelectListener) {
+    public SearchAdapter(Context context, List<ItemModel> itemList, List<String> wishlists,ItemSelectListener itemSelectListener) {
         this.context = context;
         this.itemList = itemList;
         this.itemSelectListener = itemSelectListener;
+        this.wishlists = wishlists;
         selectedPosition = -1;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ItemAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.card_item,parent,false));
+        return new SearchAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.card_search_item,parent,false));
 
     }
 
@@ -47,15 +51,26 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         ItemModel item = itemList.get(position);
 
         holder.binding.name.setText(item.getName());
+        holder.binding.brand.setText(item.getCategory());
         holder.binding.price.setText("$"+item.getPrice().toString());
-        holder.binding.type.setText(item.getType());
         Glide.with(context)
                 .load(item.getImage())
                 .centerCrop()
                 .placeholder(R.drawable.adidas)
                 .into(holder.binding.image);
 
-        holder.binding.add.setOnClickListener(new View.OnClickListener() {
+        boolean isWishlisted = false;
+        if (wishlists.contains(item.getFindId())) {
+            isWishlisted = true;
+        }
+
+        if (isWishlisted) {
+            holder.binding.wishlist.setBackground(context.getDrawable(R.drawable.ic_heart_full));
+        } else {
+            holder.binding.wishlist.setBackground(context.getDrawable(R.drawable.ic_heart));
+        }
+
+        holder.binding.cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 selectedPosition = holder.getAdapterPosition();
@@ -71,6 +86,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             }
         });
 
+        holder.binding.wishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemSelectListener.onWishlistSelected(item);
+                if (!wishlists.contains(item.getFindId())) {
+                    holder.binding.wishlist.setBackground(context.getDrawable(R.drawable.ic_heart_full));
+                    wishlists.add(item.getFindId());
+                } else {
+                    holder.binding.wishlist.setBackground(context.getDrawable(R.drawable.ic_heart));
+                    wishlists.remove(item.getFindId());
+                }
+            }
+        });
+
 
     }
 
@@ -79,20 +108,22 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         return itemList.size();
     }
 
-
     class MyViewHolder extends RecyclerView.ViewHolder{
-        CardItemBinding binding;
+        CardSearchItemBinding binding;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            binding = CardItemBinding.bind(itemView);
+            binding = CardSearchItemBinding.bind(itemView);
         }
     }
+
 
     public interface ItemSelectListener {
 
         void onItemSelected(ItemModel Item);
 
         void onImageSelected(ItemModel Item);
+
+        void onWishlistSelected(ItemModel Item);
 
     }
 }
