@@ -21,9 +21,17 @@ import android.widget.Toast;
 
 import com.project.stacklab.Activities.MainActivity;
 import com.project.stacklab.Adapters.CartAdapter;
+import com.project.stacklab.Database.AppDatabase;
+import com.project.stacklab.Helpers.UtilsHelper;
 import com.project.stacklab.Models.CartModel;
+import com.project.stacklab.Models.OrderDetailModel;
+import com.project.stacklab.Models.OrderModel;
 import com.project.stacklab.R;
 import com.project.stacklab.databinding.FragmentCartBinding;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 public class CartFragment extends Fragment {
@@ -33,10 +41,13 @@ public class CartFragment extends Fragment {
     ProgressDialog progressDialog;
     CartAdapter cartAdapter;
 
+    AppDatabase db;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentCartBinding.inflate(getLayoutInflater());
+        db = AppDatabase.getInstance(getContext());
         // Inflate the layout for this fragment
         return binding.getRoot();
     }
@@ -129,6 +140,26 @@ public class CartFragment extends Fragment {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
+                        OrderModel order = new OrderModel(UtilsHelper.randomStringId(), cartItems.size(), getTotal(), 10, 0, "Pending", UtilsHelper.getCurrentDate());
+                        db.orderDao().insertOrder(order);
+
+                        List<OrderDetailModel> orderDetails = new ArrayList<>();
+                        for (CartModel c : cartItems) {
+                            OrderDetailModel orderDetail = new OrderDetailModel();
+                            orderDetail.orderId = order.orderId;
+                            orderDetail.productId = c.getItem().getFindId();
+                            orderDetail.productName = c.getItem().getName();
+                            orderDetail.productImage = c.getItem().getImage();
+                            orderDetail.productPrice = c.getItem().getPrice();
+                            orderDetail.productCount = c.getCount();
+                            orderDetail.totalPrice = c.getCount() * c.getItem().getPrice();
+                            orderDetail.discount = 10;
+                            orderDetail.productType = c.getItem().getType();
+                            orderDetails.add(orderDetail);
+                        }
+                        db.orderDetailDao().insertOrderDetails(orderDetails);
+
                         Intent intent = new Intent(getContext(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

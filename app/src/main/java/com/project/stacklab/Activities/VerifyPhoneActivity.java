@@ -115,8 +115,6 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 "https://ananas.vn/wp-content/uploads/Pro_AV00206_2.jpeg"};
 
 
-
-
         for (String s : categories) {
             db.categoryDao().insertCategory(new CategoryModel(s));
             for (int i = 0; i < 10; i++) {
@@ -127,6 +125,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
                 randomShoe.type = types[random.nextInt(types.length)];
                 randomShoe.category = categories[random.nextInt(categories.length)];
                 randomShoe.findId = randomShoe.name + randomShoe.price + randomShoe.type + randomShoe.category;
+                randomShoe.description = "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.";
                 db.itemDao().insertItem(randomShoe);
             }
         }
