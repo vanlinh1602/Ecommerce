@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.project.stacklab.Adapters.OrderAdapter;
+import com.project.stacklab.Authentication.SessionManager;
 import com.project.stacklab.Database.AppDatabase;
 import com.project.stacklab.Models.OrderModel;
 import com.project.stacklab.R;
@@ -21,6 +22,8 @@ import java.util.List;
 public class OrderActivity extends AppCompatActivity {
 
     AppDatabase db;
+
+    SessionManager s;
 
     List<OrderModel> models;
     ActivityOrderBinding binding;
@@ -35,7 +38,13 @@ public class OrderActivity extends AppCompatActivity {
 
         db = AppDatabase.getInstance(OrderActivity.this);
 
+        s = new SessionManager(this);
+
         models = db.orderDao().getOrders();
+
+        if (s.isAdmin()) {
+            binding.tvOrder.setText("Orders");
+        }
 
         binding.back.setOnClickListener(view -> {
             finish();

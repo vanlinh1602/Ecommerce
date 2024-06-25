@@ -22,6 +22,7 @@ import com.project.stacklab.Models.ItemModel;
 import com.project.stacklab.R;
 import com.project.stacklab.databinding.ActivityVerifyPhoneBinding;
 
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +30,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
     ActivityVerifyPhoneBinding binding;
     ProgressDialog progressDialog;
-    String verificationId, phone;
+    String verificationId, phone, userName, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +41,9 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         progressDialog.setTitle("Please wait.");
         phone = getIntent().getStringExtra("phone");
 
-        if(phone==null){
-            Toast.makeText(this, "Invalid phone.", Toast.LENGTH_SHORT).show();
-            finish();
-        }
+        userName = getIntent().getStringExtra("userName");
+
+        password = getIntent().getStringExtra("password");
 
         binding.message.setText("We sent the code to "+phone);
 
@@ -89,44 +89,59 @@ public class VerifyPhoneActivity extends AppCompatActivity {
         progressDialog.dismiss();
         Toast.makeText(VerifyPhoneActivity.this, "Verification Successful", Toast.LENGTH_SHORT).show();
 
+        Boolean isAdmin = false;
+        if (userName.equals("admin")) {
+            isAdmin = true;
+        }
+
         createDatabase();
         SessionManager sessionManager = new SessionManager(VerifyPhoneActivity.this);
-        sessionManager.createLoginSession(FirebaseAuth.getInstance().getUid(), phone);
-        Intent intent = new Intent(VerifyPhoneActivity.this, MainActivity.class);
-        startActivity(intent);
+        sessionManager.createLoginSession(FirebaseAuth.getInstance().getUid(), userName, isAdmin);
+        if (isAdmin) {
+            Intent intent = new Intent(VerifyPhoneActivity.this, AdminActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Intent intent = new Intent(VerifyPhoneActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
         finish();
     }
 
     private void createDatabase() {
         progressDialog.show();
 
-
         AppDatabase db = AppDatabase.getInstance(VerifyPhoneActivity.this);
 
-        Random random = new Random();
+        List<CategoryModel> categoriesDB = db.categoryDao().getAllCategories();
 
-        String[] categories = {"Nike", "Puma", "Rebook", "Adidas"};
-        int[] prices = {500,600,300,200,700,800,900,1100};
-        String[] types = {"Sneaker", "Sport", "Casual", "Formal"};
-        String[] links = {"https://ananas.vn/wp-content/uploads/Pro_AV00205_2.jpeg",
-                "https://ananas.vn/wp-content/uploads/Pro_AV00207_2.jpg",
-                "https://ananas.vn/wp-content/uploads/Pro_AV00208_2.jpg",
-                "https://ananas.vn/wp-content/uploads/Pro_AV00209_2.jpg",
-                "https://ananas.vn/wp-content/uploads/Pro_AV00206_2.jpeg"};
+        if (categoriesDB.isEmpty()) {
+            Random random = new Random();
+
+            String[] categories = {"Nike", "Puma", "Rebook", "Adidas"};
+            int[] prices = {500,600,300,200,700,800,900,1100};
+            String[] types = {"Sneaker", "Sport", "Casual", "Formal"};
+            String[] links = {"https://ananas.vn/wp-content/uploads/Pro_AV00205_2.jpeg",
+                    "https://ananas.vn/wp-content/uploads/Pro_AV00207_2.jpg",
+                    "https://ananas.vn/wp-content/uploads/Pro_AV00208_2.jpg",
+                    "https://ananas.vn/wp-content/uploads/Pro_AV00209_2.jpg",
+                    "https://ananas.vn/wp-content/uploads/Pro_AV00206_2.jpeg"};
 
 
-        for (String s : categories) {
-            db.categoryDao().insertCategory(new CategoryModel(s));
-            for (int i = 0; i < 10; i++) {
-                ItemModel randomShoe = new ItemModel();
-                randomShoe.name = "Ananas " + i;
-                randomShoe.price = prices[random.nextInt(prices.length)];
-                randomShoe.image = links[random.nextInt(links.length)];
-                randomShoe.type = types[random.nextInt(types.length)];
-                randomShoe.category = categories[random.nextInt(categories.length)];
-                randomShoe.findId = randomShoe.name + randomShoe.price + randomShoe.type + randomShoe.category;
-                randomShoe.description = "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.";
-                db.itemDao().insertItem(randomShoe);
+            for (String s : categories) {
+                db.categoryDao().insertCategory(new CategoryModel(s));
+                for (int i = 0; i < 10; i++) {
+                    ItemModel randomShoe = new ItemModel();
+                    randomShoe.name = "Ananas " + i;
+                    randomShoe.price = prices[random.nextInt(prices.length)];
+                    randomShoe.image = links[random.nextInt(links.length)];
+                    randomShoe.type = types[random.nextInt(types.length)];
+                    randomShoe.category = categories[random.nextInt(categories.length)];
+                    randomShoe.findId = randomShoe.name + randomShoe.price + randomShoe.type + randomShoe.category;
+                    randomShoe.description = "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.";
+                    db.itemDao().insertItem(randomShoe);
+                }
             }
         }
 

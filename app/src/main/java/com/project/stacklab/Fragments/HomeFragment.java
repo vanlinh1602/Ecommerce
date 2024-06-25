@@ -96,11 +96,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onImageSelected(ItemModel item) {
-                //Toast.makeText(getContext(), "Image clicked", Toast.LENGTH_SHORT).show();
-                // change to product detail
                 Intent intent = new Intent(getContext(), ProductDetail.class);
                 intent.putExtra("item", item.getFindId());
-//                intent.putExtra("cartItems", cartItems);
                 startActivity(intent);
             }
         });

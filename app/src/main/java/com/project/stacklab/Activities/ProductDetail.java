@@ -1,30 +1,18 @@
 package com.project.stacklab.Activities;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.databinding.ObservableArrayList;
 
 import com.bumptech.glide.Glide;
 import com.project.stacklab.Database.AppDatabase;
-import com.project.stacklab.Models.CartModel;
 import com.project.stacklab.Models.ItemModel;
 import com.project.stacklab.Models.WishlistModel;
 import com.project.stacklab.R;
 import com.project.stacklab.databinding.ActivityProductDetailBinding;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDetail extends AppCompatActivity {
@@ -87,8 +75,6 @@ public class ProductDetail extends AppCompatActivity {
     }
 
     protected  void addToCartHandle(ItemModel itemModel) {
-        // CartModel cartModel = new CartModel(itemModel, 1);
-        // cartItems.add(cartModel);
         Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show();
     }
     protected void wishListHandle(String id) {

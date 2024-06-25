@@ -38,7 +38,7 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SessionManager s = new SessionManager(getContext());
-        binding.phone.setText(s.getUsersDetailsFromSessions().get(SessionManager.KEY_PHONE));
+        binding.phone.setText(s.getUsersDetailsFromSessions().get(SessionManager.KEY_NAME));
 
         binding.logout.setOnClickListener(new View.OnClickListener() {
             @Override

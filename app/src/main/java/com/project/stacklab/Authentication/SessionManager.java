@@ -16,6 +16,9 @@ public class SessionManager {
 
     public static final String KEY_PHONE = "phone";
 
+    public  static final String KEY_NAME = "name";
+
+    public static final String IS_ADMIN = "isAdmin";
 
     public SessionManager(Context _context) {
         context = _context;
@@ -32,13 +35,14 @@ public class SessionManager {
         this.editor = editor;
     }
 
-    public void createLoginSession(String UID, String phone) {
+    public void createLoginSession(String UID, String name, Boolean isAdmin) {
         editor.putBoolean(IS_LOGIN, true);
 
         editor.putString(KEY_UID, UID);
-        editor.putString(KEY_PHONE, phone);
 
+        editor.putBoolean(IS_ADMIN, isAdmin);
 
+        editor.putString(KEY_NAME, name);
         editor.commit();
     }
 
@@ -48,6 +52,7 @@ public class SessionManager {
 
         userData.put(KEY_UID, usersSession.getString(KEY_UID, null));
         userData.put(KEY_PHONE, usersSession.getString(KEY_PHONE, null));
+        userData.put(KEY_NAME, usersSession.getString(KEY_NAME, null));
 
 
         return userData;
@@ -65,6 +70,9 @@ public class SessionManager {
             return false;
         }
 
+    }
+    public Boolean isAdmin() {
+        return usersSession.getBoolean(IS_ADMIN, false);
     }
 
     public void logoutSession() {

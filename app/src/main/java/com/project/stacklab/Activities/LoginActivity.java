@@ -27,11 +27,11 @@ public class LoginActivity extends AppCompatActivity {
         binding.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phone = binding.phone.getText().toString();
-                if (!verifyPhoneNumber(phone)) return;
+                String userName = binding.userName.getText().toString();
+                String password = binding.password.getText().toString();
 
                 startActivity(new Intent(LoginActivity.this, VerifyPhoneActivity.class)
-                        .putExtra("phone", phone));
+                        .putExtra("userName", userName).putExtra("password", password));
             }
         });
 
@@ -58,8 +58,13 @@ public class LoginActivity extends AppCompatActivity {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
 
         if (sessionManager.checkLogin()) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
+            if (sessionManager.isAdmin()) {
+                startActivity(new Intent(LoginActivity.this, AdminActivity.class));
+                finish();
+            } else {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
+            }
         } else {
             FirebaseAuth.getInstance().signOut();
         }
