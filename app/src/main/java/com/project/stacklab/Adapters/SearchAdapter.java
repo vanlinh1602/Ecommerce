@@ -23,15 +23,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
     List<String> wishlists;
 
+    Boolean isAdmin;
+
     ItemSelectListener itemSelectListener;
     int selectedPosition;
 
 
-    public SearchAdapter(Context context, List<ItemModel> itemList, List<String> wishlists,ItemSelectListener itemSelectListener) {
+    public SearchAdapter(Context context, List<ItemModel> itemList, List<String> wishlists,ItemSelectListener itemSelectListener, Boolean isAdmin) {
         this.context = context;
         this.itemList = itemList;
         this.itemSelectListener = itemSelectListener;
         this.wishlists = wishlists;
+        this.isAdmin = isAdmin;
         selectedPosition = -1;
     }
 
@@ -100,7 +103,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
             }
         });
 
-
+        if (isAdmin) {
+            holder.binding.wishlist.setVisibility(View.GONE);
+            holder.binding.cart.setVisibility(View.GONE);
+        }
     }
 
     @Override

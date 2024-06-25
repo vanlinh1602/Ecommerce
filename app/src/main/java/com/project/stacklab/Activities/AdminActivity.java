@@ -45,5 +45,9 @@ public class AdminActivity extends AppCompatActivity {
         binding.revenueManagement.setOnClickListener(view -> {
             startActivity(new Intent(this, RevenueActivity.class));
         });
+
+        binding.productManagement.setOnClickListener(view -> {
+            startActivity(new Intent(this, ProductManagementActivity.class));
+        });
     }
 }

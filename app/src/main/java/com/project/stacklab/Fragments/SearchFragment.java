@@ -142,7 +142,7 @@ public class SearchFragment extends Fragment {
                 }
                 searchAdapter.notifyDataSetChanged();
             }
-        });
+        }, false);
 
         binding.rvItems.setAdapter(searchAdapter);
         binding.rvItems.setLayoutManager(new GridLayoutManager(getContext(), 1));
