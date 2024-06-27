@@ -44,26 +44,26 @@ public class RevenueActivity extends AppCompatActivity {
         int success = 0;
         int pending = 0;
         int cancelled = 0;
-        double revenue = 0;
+        double totalRevenue = 0;
         int soldItem = 0;
         double[] mothlyRevenue = new double[12];
 
         for (OrderModel order : orders) {
             if (order.status.equals("Success")) {
                 success++;
+                String month = order.date.split("-")[1];
+                mothlyRevenue[Integer.parseInt(month) - 1] += order.totalPrice;
+                totalRevenue += order.totalPrice;
+                List<OrderDetailModel> items = db.orderDetailDao().getOrderDetaills(order.orderId);
+                soldItem += items.stream().reduce(0, (subtotal, item) -> subtotal + item.productCount, Integer::sum);
             } else if (order.status.equals("Pending")) {
                 pending++;
             } else if (order.status.equals("Cancelled")) {
                 cancelled++;
             }
-            revenue += order.totalPrice;
-            String month = order.date.split("-")[1];
-            mothlyRevenue[Integer.parseInt(month) - 1] += order.totalPrice;
-            List<OrderDetailModel> items = db.orderDetailDao().getOrderDetaills(order.orderId);
-            soldItem += items.stream().reduce(0, (subtotal, item) -> subtotal + item.productCount, Integer::sum);
         }
 
-        binding.tvTotalRevenue.setText(String.valueOf(revenue));
+        binding.tvTotalRevenue.setText(String.valueOf(totalRevenue));
         binding.tvTotalOrder.setText(String.valueOf(orders.size()));
         binding.tvSoldItems.setText(String.valueOf(soldItem));
         binding.tvSuccessfulOrder.setText(String.valueOf(success));
@@ -73,9 +73,15 @@ public class RevenueActivity extends AppCompatActivity {
         });
 
         ArrayList<PieEntry> ordersData = new ArrayList<>();
-        ordersData.add(new PieEntry(success, "Success Order"));
-        ordersData.add(new PieEntry(pending, "Pending Order"));
-        ordersData.add(new PieEntry(cancelled, "Cancelled Order"));
+        if (success > 0) {
+            ordersData.add(new PieEntry(success, "Success Order"));
+        }
+        if (pending > 0) {
+            ordersData.add(new PieEntry(pending, "Pending Order"));
+        }
+        if (cancelled > 0) {
+            ordersData.add(new PieEntry(cancelled, "Cancelled Order"));
+        }
 
         PieDataSet orderDataSet = new PieDataSet(ordersData, "Orders");
         orderDataSet.setColors(new int[]{R.color.green, R.color.yellow, R.color.red}, this);

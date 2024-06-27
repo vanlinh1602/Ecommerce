@@ -18,4 +18,7 @@ public interface OrderDao {
     @Query("SELECT * FROM orders where orderId = :orderId")
     OrderModel getOrder(String orderId);
 
+    @Query("UPDATE orders SET status = :status where id = :id")
+    void updateOrderStatus(int id, String status);
+
 }

@@ -55,11 +55,27 @@ public class OrderActivity extends AppCompatActivity {
             public void onOrderSelected(OrderModel orderModel) {
                 Intent intent = new Intent(OrderActivity.this, OrderDetailActivity.class);
                 intent.putExtra("orderId", orderModel.orderId);
-                startActivity(intent);
+                startActivityForResult(intent, 2);
             }
         });
 
         binding.rvItems.setAdapter(orderAdapter);
         binding.rvItems.setLayoutManager(new GridLayoutManager(OrderActivity.this, 1));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Check if the request code is the same as what we passed to startActivityForResult()
+        if (requestCode == 2) {
+            // If the result code is RESULT_OK, that means the ProductEditorActivity finished successfully
+            if (resultCode == RESULT_OK) {
+                // Refresh the items list
+                models = db.orderDao().getOrders();
+                orderAdapter.setItemList(models);
+                orderAdapter.notifyDataSetChanged();
+            }
+        }
     }
 }

@@ -59,6 +59,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
             }
         });
 
+        if (order.status.equals("Success")) {
+            holder.binding.image.setImageDrawable(context.getResources().getDrawable(R.drawable.delivery_success));
+        } else if (order.status.equals("Pending")) {
+            holder.binding.image.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_shiping));
+        } else if (order.status.equals("Cancelled")) {
+            holder.binding.image.setImageDrawable(context.getResources().getDrawable(R.drawable.delivery_cancel));
+        }
+
 
 
     }

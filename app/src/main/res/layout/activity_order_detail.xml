@@ -206,5 +206,41 @@
                 android:textSize="14sp" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/btn_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="5dp">
+
+            <Button
+                android:id="@+id/cancelled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Canceled"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/red"/>
+
+            <Button
+                android:id="@+id/success"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@id/cancelled"
+                android:backgroundTint="@color/green"
+                android:text="Success"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/pending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="29dp"
+                android:layout_toEndOf="@id/success"
+                android:backgroundTint="@color/orange"
+                android:text="Pending"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
