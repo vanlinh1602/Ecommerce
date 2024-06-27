@@ -48,6 +48,9 @@ public class ProductManagementActivity extends AppCompatActivity {
             }
             @Override
             public void onImageSelected(ItemModel item) {
+                Intent intent = new Intent(ProductManagementActivity.this, ProductEditorActivity.class);
+                intent.putExtra("id", item.findId);
+                startActivityForResult(intent, 1); // 1 is the request code
             }
             @Override
             public void onWishlistSelected(ItemModel item) {
@@ -61,5 +64,27 @@ public class ProductManagementActivity extends AppCompatActivity {
             finish();
         });
 
+        binding.addProduct.setOnClickListener(view -> {
+            Intent intent = new Intent(ProductManagementActivity.this, ProductEditorActivity.class);
+            startActivityForResult(intent, 1); // 1 is the request code
+            finish();
+        });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Check if the request code is the same as what we passed to startActivityForResult()
+        if (requestCode == 1) {
+            // If the result code is RESULT_OK, that means the ProductEditorActivity finished successfully
+            if (resultCode == RESULT_OK) {
+                // Refresh the items list
+                items = db.itemDao().getAllItems();
+                adapter.setItemList(items);
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 }

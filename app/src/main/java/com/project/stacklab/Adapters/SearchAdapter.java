@@ -82,7 +82,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         });
 
         // native to product detail when clicked on image
-        holder.binding.image.setOnClickListener(new View.OnClickListener() {
+        holder.binding.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 itemSelectListener.onImageSelected(item);

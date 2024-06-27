@@ -24,4 +24,10 @@ public interface ItemDao {
 
     @Query("SELECT * FROM items")
     List<ItemModel> getAllItems();
+
+    @Query("UPDATE items SET name = :name, image = :image, type = :type, price = :price, category = :category, description = :description WHERE findId = :findId")
+    void updateItem(String findId, String name, String image, String type, Integer price, String category, String description);
+
+    @Query("DELETE FROM items WHERE findId = :findId")
+    void deleteItem(String findId);
 }
