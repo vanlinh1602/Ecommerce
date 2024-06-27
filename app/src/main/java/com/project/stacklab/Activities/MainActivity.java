@@ -5,6 +5,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableList;
 import androidx.fragment.app.Fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import com.project.stacklab.Fragments.ProfileFragment;
 import com.project.stacklab.Fragments.SearchFragment;
 import com.project.stacklab.Helpers.CartManager;
 import com.project.stacklab.Models.CartModel;
+import com.project.stacklab.Models.ItemModel;
 import com.project.stacklab.R;
 import com.project.stacklab.databinding.ActivityMainBinding;
 
@@ -137,6 +139,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         CartManager.saveCartItems(MainActivity.this,cartItems);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+            if (resultCode == Activity.RESULT_OK) {
+                ItemModel item = (ItemModel) data.getSerializableExtra("item");
+                if (item == null) return;
+                cartItems.add(new CartModel(item, 1));
+            }
     }
 
     private void loadFragment(Fragment fragment) {

@@ -1,18 +1,22 @@
 package com.project.stacklab.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.ObservableArrayList;
 
 import com.bumptech.glide.Glide;
 import com.project.stacklab.Database.AppDatabase;
+import com.project.stacklab.Models.CartModel;
 import com.project.stacklab.Models.ItemModel;
 import com.project.stacklab.Models.WishlistModel;
 import com.project.stacklab.R;
 import com.project.stacklab.databinding.ActivityProductDetailBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDetail extends AppCompatActivity {
@@ -24,6 +28,8 @@ public class ProductDetail extends AppCompatActivity {
 
     boolean isWishlisted = false;
 
+    boolean isAddedToCart = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +37,11 @@ public class ProductDetail extends AppCompatActivity {
         binding = ActivityProductDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        String id = getIntent().getStringExtra("item");
 
         db = AppDatabase.getInstance(ProductDetail.this);
+
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("item");
 
         List<WishlistModel> wishlistModels = db.wishlistDao().getWishList();
         for (WishlistModel wishlistModel : wishlistModels) {
@@ -62,6 +70,11 @@ public class ProductDetail extends AppCompatActivity {
                 .into(binding.image);
 
         binding.back.setOnClickListener(view -> {
+            if (isAddedToCart) {
+                Intent intent1 = new Intent();;
+                intent1.putExtra("item", itemModel);
+                setResult(RESULT_OK, intent1);
+            }
             finish();
         });
 
@@ -72,9 +85,10 @@ public class ProductDetail extends AppCompatActivity {
         binding.addToCart.setOnClickListener(view -> {
             addToCartHandle(itemModel);
         });
-    }
+     }
 
     protected  void addToCartHandle(ItemModel itemModel) {
+        isAddedToCart = true;
         Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show();
     }
     protected void wishListHandle(String id) {

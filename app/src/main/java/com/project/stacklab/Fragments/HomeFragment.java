@@ -1,6 +1,7 @@
 package com.project.stacklab.Fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -41,16 +42,18 @@ public class HomeFragment extends Fragment {
     List<ItemModel> items;
 
     ObservableArrayList<CartModel> cartItems;
+
     ItemAdapter itemAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
         // Inflate the layout for this fragment
 
         return binding.getRoot();
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -58,8 +61,7 @@ public class HomeFragment extends Fragment {
         setAutoScrollBanner();
 
         if (getArguments() != null) {
-            cartItems = (ObservableArrayList<CartModel>)
-                    getArguments().getSerializable("cartItems");
+            cartItems = (ObservableArrayList<CartModel>) getArguments().getSerializable("cartItems");
         }
         setCatLog();
 
@@ -69,19 +71,22 @@ public class HomeFragment extends Fragment {
         AppDatabase db = AppDatabase.getInstance(getContext());
         categories = db.categoryDao().getAllCategories();
 
-        categoriesAdapter = new CategoriesAdapter(getContext(), categories, new CategoriesAdapter.CategorySelectListener() {
-            @Override
-            public void onCategorySelected(CategoryModel category) {
-                items.clear();
-                items.addAll(db.itemDao().getItemsForCategory(category.getName()));
-                //Toast.makeText(getContext(), String.valueOf(items.size()), Toast.LENGTH_SHORT).show();
-                itemAdapter.notifyDataSetChanged();
-                categoriesAdapter.notifyDataSetChanged();
-            }
-        });
+        categoriesAdapter = new CategoriesAdapter(getContext(), categories,
+                new CategoriesAdapter.CategorySelectListener() {
+                    @Override
+                    public void onCategorySelected(CategoryModel category) {
+                        items.clear();
+                        items.addAll(db.itemDao().getItemsForCategory(category.getName()));
+                        // Toast.makeText(getContext(), String.valueOf(items.size()),
+                        // Toast.LENGTH_SHORT).show();
+                        itemAdapter.notifyDataSetChanged();
+                        categoriesAdapter.notifyDataSetChanged();
+                    }
+                });
 
         binding.rvCategory.setAdapter(categoriesAdapter);
-        binding.rvCategory.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.rvCategory
+                .setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         binding.rvCategory.setHasFixedSize(true);
 
         items = new ArrayList<>();
@@ -97,8 +102,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onImageSelected(ItemModel item) {
                 Intent intent = new Intent(getContext(), ProductDetail.class);
-                intent.putExtra("item", item.getFindId());
-                startActivity(intent);
+                intent.putExtra("item", item.findId);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -108,7 +113,6 @@ public class HomeFragment extends Fragment {
 
         categoriesAdapter.getCategorySelectListener().onCategorySelected(categories.get(0));
         categoriesAdapter.setSelectedPosition(0);
-
 
     }
 
@@ -132,7 +136,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         Handler handler = new Handler();
         Runnable runnable = new Runnable() {
             @Override
@@ -143,7 +146,6 @@ public class HomeFragment extends Fragment {
                 handler.postDelayed(this, 5000);
             }
         };
-
 
         handler.postDelayed(runnable, 5000);
     }

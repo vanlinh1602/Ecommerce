@@ -122,9 +122,8 @@ public class FavouriteFragment extends Fragment {
             @Override
             public void onImageSelected(ItemModel item) {
                 Intent intent = new Intent(getContext(), ProductDetail.class);
-                intent.putExtra("item", item.getFindId());
-//                intent.putExtra("cartItems", cartItems);
-                startActivity(intent);
+                intent.putExtra("item", item.findId);
+                startActivityForResult(intent, 1);
             }
         });
 

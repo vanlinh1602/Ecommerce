@@ -86,10 +86,9 @@ public class SearchFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         if (getArguments() != null) {
-            cartItems = (ObservableArrayList<CartModel>)
-                    getArguments().getSerializable("cartItems");
+            cartItems = (ObservableArrayList<CartModel>) getArguments().getSerializable("cartItems");
         }
         // Inflate the layout for this fragment
         db = AppDatabase.getInstance(getContext());
@@ -117,13 +116,13 @@ public class SearchFragment extends Fragment {
                     Toast.makeText(getContext(), "Added to cart", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onImageSelected(ItemModel item) {
                 // navigate to product detail
                 Intent intent = new Intent(getContext(), ProductDetail.class);
-                intent.putExtra("item", item.getFindId());
-//                intent.putExtra("cartItems", cartItems);
-                startActivity(intent);
+                intent.putExtra("item", item.findId);
+                startActivityForResult(intent, 1);
             }
 
             @Override
