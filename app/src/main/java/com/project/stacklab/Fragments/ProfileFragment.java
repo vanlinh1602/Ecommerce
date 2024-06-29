@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.project.stacklab.Activities.AboutUsActivity;
+import com.project.stacklab.Activities.ContactActivity;
 import com.project.stacklab.Activities.LoginActivity;
 import com.project.stacklab.Activities.MainActivity;
 import com.project.stacklab.Activities.OrderActivity;
@@ -69,5 +71,23 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        binding.AboutUsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), AboutUsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.ContactButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ContactActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 }

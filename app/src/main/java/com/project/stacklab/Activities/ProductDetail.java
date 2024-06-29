@@ -85,6 +85,7 @@ public class ProductDetail extends AppCompatActivity {
         binding.addToCart.setOnClickListener(view -> {
             addToCartHandle(itemModel);
         });
+        setUpSizeAndColor();
      }
 
     protected  void addToCartHandle(ItemModel itemModel) {
@@ -105,5 +106,63 @@ public class ProductDetail extends AppCompatActivity {
             Toast.makeText(this, "Added to wishlist", Toast.LENGTH_SHORT).show();
             isWishlisted = true;
         }
+    }
+
+    protected  void setUpSizeAndColor() {
+        binding.colorOne.setOnClickListener(view -> {
+            binding.colorOne.setText("x");
+            binding.colorTwo.setText("");
+            binding.colorThree.setText("");
+            binding.colorFour.setText("");
+        });
+
+        binding.colorTwo.setOnClickListener(view -> {
+            binding.colorOne.setText("");
+            binding.colorTwo.setText("x");
+            binding.colorThree.setText("");
+            binding.colorFour.setText("");
+        });
+
+        binding.colorThree.setOnClickListener(view -> {
+            binding.colorOne.setText("");
+            binding.colorTwo.setText("");
+            binding.colorThree.setText("x");
+            binding.colorFour.setText("");
+        });
+
+        binding.colorFour.setOnClickListener(view -> {
+            binding.colorOne.setText("");
+            binding.colorTwo.setText("");
+            binding.colorThree.setText("");
+            binding.colorFour.setText("x");
+        });
+
+        binding.sizeOne.setOnClickListener(view -> {
+            binding.sizeOne.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.orange));
+            binding.sizeTwo.setBackgroundTintList(null);
+            binding.sizeThree.setBackgroundTintList(null);
+            binding.sizeFour.setBackgroundTintList(null);
+        });
+
+        binding.sizeTwo.setOnClickListener(view -> {
+            binding.sizeOne.setBackgroundTintList(null);
+            binding.sizeTwo.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.orange));
+            binding.sizeThree.setBackgroundTintList(null);
+            binding.sizeFour.setBackgroundTintList(null);
+        });
+
+        binding.sizeThree.setOnClickListener(view -> {
+            binding.sizeOne.setBackgroundTintList(null);
+            binding.sizeTwo.setBackgroundTintList(null);
+            binding.sizeThree.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.orange));
+            binding.sizeFour.setBackgroundTintList(null);
+        });
+
+        binding.sizeFour.setOnClickListener(view -> {
+            binding.sizeOne.setBackgroundTintList(null);
+            binding.sizeTwo.setBackgroundTintList(null);
+            binding.sizeThree.setBackgroundTintList(null);
+            binding.sizeFour.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.orange));
+        });
     }
 }

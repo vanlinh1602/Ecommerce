@@ -102,6 +102,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/black"/>
                 <TextView
+                    android:id="@+id/size_one"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginHorizontal="5dp"
@@ -112,6 +113,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/black"/>
                 <TextView
+                    android:id="@+id/size_two"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginHorizontal="5dp"
@@ -122,6 +124,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/black"/>
                 <TextView
+                    android:id="@+id/size_three"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginHorizontal="5dp"
@@ -132,6 +135,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/black"/>
                 <TextView
+                    android:id="@+id/size_four"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginHorizontal="5dp"
@@ -155,6 +159,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/black"/>
                 <TextView
+                    android:id="@+id/color_one"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginHorizontal="5dp"
@@ -163,8 +168,9 @@
                     android:padding="10dp"
                     android:background="@drawable/bg_rounded"
                     android:textSize="14sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/purple"/>
                 <TextView
+                    android:id="@+id/color_two"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginHorizontal="5dp"
@@ -173,8 +179,9 @@
                     android:backgroundTint="@color/black"
                     android:background="@drawable/bg_rounded"
                     android:textSize="14sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/purple"/>
                 <TextView
+                    android:id="@+id/color_three"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginHorizontal="5dp"
@@ -183,8 +190,9 @@
                     android:background="@drawable/bg_rounded"
                     android:backgroundTint="@color/grey"
                     android:textSize="14sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/purple"/>
                 <TextView
+                    android:id="@+id/color_four"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginHorizontal="5dp"
@@ -193,7 +201,7 @@
                     android:backgroundTint="@color/cream"
                     android:background="@drawable/bg_rounded"
                     android:textSize="14sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/purple"/>
             </LinearLayout>
             <TextView
                 android:id="@+id/description"
