@@ -31,6 +31,7 @@ import com.project.stacklab.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HomeFragment extends Fragment {
     FragmentHomeBinding binding;
@@ -113,6 +114,14 @@ public class HomeFragment extends Fragment {
 
         categoriesAdapter.getCategorySelectListener().onCategorySelected(categories.get(0));
         categoriesAdapter.setSelectedPosition(0);
+
+        binding.btnSearch.setOnClickListener(view1 -> {
+            String search = binding.etSearch.getText().toString();
+            List<ItemModel> searchItems = items.stream().filter(item -> item.getName().toLowerCase().contains(search.toLowerCase())).collect(Collectors.toList());
+            itemAdapter.setItemList(searchItems);
+            itemAdapter.notifyDataSetChanged();
+        });
+
 
     }
 

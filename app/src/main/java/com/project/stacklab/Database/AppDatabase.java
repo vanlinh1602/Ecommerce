@@ -10,15 +10,19 @@ import com.project.stacklab.Models.CategoryModel;
 import com.project.stacklab.Models.ItemModel;
 import com.project.stacklab.Models.OrderDetailModel;
 import com.project.stacklab.Models.OrderModel;
+import com.project.stacklab.Models.PaymentModel;
 import com.project.stacklab.Models.WishlistModel;
 
-@Database(entities = {CategoryModel.class, ItemModel.class, WishlistModel.class, OrderModel.class, OrderDetailModel.class}, version = 1)
+@Database(entities = {CategoryModel.class, ItemModel.class, WishlistModel.class, OrderModel.class, OrderDetailModel.class,
+        PaymentModel.class
+}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract CategoryDao categoryDao();
     public abstract ItemDao itemDao();
     public abstract WishlistDao wishlistDao();
     public abstract OrderDao orderDao();
     public abstract OrderDetailDao orderDetailDao();
+    public abstract PaymentDao paymentDao();
 
     private static AppDatabase instance;
     public static AppDatabase getInstance(Context context) {

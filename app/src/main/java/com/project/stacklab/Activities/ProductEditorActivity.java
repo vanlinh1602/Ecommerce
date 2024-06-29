@@ -31,11 +31,13 @@ public class ProductEditorActivity extends AppCompatActivity {
 
         db = AppDatabase.getInstance(this);
 
-        String[] categories = {"Nike", "Puma", "Rebook", "Adidas"};
-        String[] types = {"Sneaker", "Sport", "Casual", "Formal"};
+        String[] categories = { "Nike", "Puma", "Rebook", "Adidas" };
+        String[] types = { "Sneaker", "Sport", "Casual", "Formal" };
 
-        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, categories);
-        ArrayAdapter<String> typesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, types);
+        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, categories);
+        ArrayAdapter<String> typesAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_dropdown_item, types);
 
         binding.spinnerCategory.setAdapter(categoriesAdapter);
         binding.spinnerType.setAdapter(typesAdapter);
@@ -67,8 +69,10 @@ public class ProductEditorActivity extends AppCompatActivity {
             item.setType(binding.spinnerType.getSelectedItem().toString());
 
             if (id != null) {
-                db.itemDao().updateItem(item.getFindId(), item.getName(), item.getImage(), item.getType(), item.getPrice(), item.getCategory(), item.getDescription());
+                db.itemDao().updateItem(item.findId, item.getName(), item.getImage(), item.getType(), item.getPrice(),
+                        item.getCategory(), item.getDescription());
             } else {
+                item.findId = item.getFindId();
                 db.itemDao().insertItem(item);
             }
 

@@ -129,5 +129,12 @@ public class FavouriteFragment extends Fragment {
 
         binding.rvItems.setAdapter(wishlistAdapter);
         binding.rvItems.setLayoutManager(new GridLayoutManager(getContext(), 1));
+
+        binding.btnSearch.setOnClickListener(view1 -> {
+            String search = binding.etSearch.getText().toString();
+            List<ItemModel> searchItems = items.stream().filter(item -> item.getName().toLowerCase().contains(search.toLowerCase())).collect(Collectors.toList());
+            wishlistAdapter.setItemList(searchItems);
+            wishlistAdapter.notifyDataSetChanged();
+        });
     }
 }

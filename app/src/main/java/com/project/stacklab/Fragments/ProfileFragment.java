@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.project.stacklab.Activities.LoginActivity;
 import com.project.stacklab.Activities.MainActivity;
 import com.project.stacklab.Activities.OrderActivity;
+import com.project.stacklab.Activities.PaymentActivity;
 import com.project.stacklab.Authentication.SessionManager;
 import com.project.stacklab.Helpers.CartManager;
 import com.project.stacklab.R;
@@ -57,6 +58,14 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), OrderActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.PaymentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), PaymentActivity.class);
                 startActivity(intent);
             }
         });

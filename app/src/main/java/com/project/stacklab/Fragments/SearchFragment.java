@@ -26,6 +26,7 @@ import com.project.stacklab.databinding.FragmentFavouriteBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +42,8 @@ public class SearchFragment extends Fragment {
     List<String> wishlists;
 
     SearchAdapter searchAdapter;
+
+    List<ItemModel> items;
 
     ObservableArrayList<CartModel> cartItems;
 
@@ -106,7 +109,7 @@ public class SearchFragment extends Fragment {
             wishlists.add(wishlist.getFindId());
         }
 
-        List<ItemModel> items = db.itemDao().getAllItems();
+        items = db.itemDao().getAllItems();
 
         searchAdapter = new SearchAdapter(getContext(), items, wishlists, new SearchAdapter.ItemSelectListener() {
             @Override
@@ -127,7 +130,7 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onWishlistSelected(ItemModel item) {
-                String findId = item.getFindId();
+                String findId = item.findId;
 
                 if (wishlists.contains(findId)) {
                     // remove from wishlist
@@ -145,6 +148,13 @@ public class SearchFragment extends Fragment {
 
         binding.rvItems.setAdapter(searchAdapter);
         binding.rvItems.setLayoutManager(new GridLayoutManager(getContext(), 1));
+
+        binding.btnSearch.setOnClickListener(view1 -> {
+            String search = binding.etSearch.getText().toString();
+            List<ItemModel> searchItems = items.stream().filter(item -> item.getName().toLowerCase().contains(search.toLowerCase())).collect(Collectors.toList());
+            searchAdapter.setItemList(searchItems);
+            searchAdapter.notifyDataSetChanged();
+        });
 
     }
 }

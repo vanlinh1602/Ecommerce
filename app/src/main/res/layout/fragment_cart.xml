@@ -72,8 +72,7 @@
         android:layout_weight="1"
         android:clipToPadding="false"
         android:paddingHorizontal="13dp"
-        android:paddingBottom="60dp"
-        tools:listitem="@layout/card_cart_item" />
+        android:paddingBottom="60dp" />
 
     <LinearLayout
         android:id="@+id/totalBox"
@@ -82,7 +81,7 @@
         android:background="@drawable/top_rounded_dialog"
         android:orientation="vertical"
         android:paddingTop="20dp"
-        android:visibility="gone">
+        >
 
         <TextView
             android:layout_width="wrap_content"

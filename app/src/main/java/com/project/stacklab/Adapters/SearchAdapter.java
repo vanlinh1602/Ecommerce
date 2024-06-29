@@ -28,8 +28,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     ItemSelectListener itemSelectListener;
     int selectedPosition;
 
-
-    public SearchAdapter(Context context, List<ItemModel> itemList, List<String> wishlists,ItemSelectListener itemSelectListener, Boolean isAdmin) {
+    public SearchAdapter(Context context, List<ItemModel> itemList, List<String> wishlists,
+            ItemSelectListener itemSelectListener, Boolean isAdmin) {
         this.context = context;
         this.itemList = itemList;
         this.itemSelectListener = itemSelectListener;
@@ -41,7 +41,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new SearchAdapter.MyViewHolder(LayoutInflater.from(context).inflate(R.layout.card_search_item,parent,false));
+        return new SearchAdapter.MyViewHolder(
+                LayoutInflater.from(context).inflate(R.layout.card_search_item, parent, false));
 
     }
 
@@ -55,7 +56,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
         holder.binding.name.setText(item.getName());
         holder.binding.brand.setText(item.getCategory());
-        holder.binding.price.setText("$"+item.getPrice().toString());
+        holder.binding.price.setText("$" + item.getPrice().toString());
         Glide.with(context)
                 .load(item.getImage())
                 .centerCrop()
@@ -63,7 +64,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
                 .into(holder.binding.image);
 
         boolean isWishlisted = false;
-        if (wishlists.contains(item.getFindId())) {
+        if (wishlists.contains(item.findId)) {
             isWishlisted = true;
         }
 
@@ -93,12 +94,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
             @Override
             public void onClick(View view) {
                 itemSelectListener.onWishlistSelected(item);
-                if (!wishlists.contains(item.getFindId())) {
+                if (!wishlists.contains(item.findId)) {
                     holder.binding.wishlist.setBackground(context.getDrawable(R.drawable.ic_heart_full));
-                    wishlists.add(item.getFindId());
+                    wishlists.add(item.findId);
                 } else {
                     holder.binding.wishlist.setBackground(context.getDrawable(R.drawable.ic_heart));
-                    wishlists.remove(item.getFindId());
+                    wishlists.remove(item.findId);
                 }
             }
         });
@@ -114,14 +115,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         return itemList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
         CardSearchItemBinding binding;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             binding = CardSearchItemBinding.bind(itemView);
         }
     }
-
 
     public interface ItemSelectListener {
 

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.project.stacklab.Activities.MainActivity;
+import com.project.stacklab.Activities.PaymentActivity;
 import com.project.stacklab.Adapters.CartAdapter;
 import com.project.stacklab.Database.AppDatabase;
 import com.project.stacklab.Helpers.UtilsHelper;
@@ -41,6 +42,8 @@ public class CartFragment extends Fragment {
     ProgressDialog progressDialog;
     CartAdapter cartAdapter;
 
+    boolean isHaveAddress = false;
+
     AppDatabase db;
 
     @Override
@@ -60,6 +63,8 @@ public class CartFragment extends Fragment {
             cartItems = (ObservableArrayList<CartModel>)
                     getArguments().getSerializable("cartItems");
         }
+
+        isHaveAddress = db.paymentDao().getPayment().size() > 0;
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("Please wait.");
         progressDialog.setCancelable(false);
@@ -74,6 +79,10 @@ public class CartFragment extends Fragment {
         binding.checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!isHaveAddress) {
+                    showMessageMissPayment();
+                    return;
+                }
                 showMessageDialog();
             }
         });
@@ -172,5 +181,22 @@ public class CartFragment extends Fragment {
         alertDialog.show();
     }
 
+    private void showMessageMissPayment() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.setTitle("Please add your payment information.");
+
+        builder.setPositiveButton("Enter payment", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                isHaveAddress = true;
+                Intent intent = new Intent(getContext(), PaymentActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
 
 }
